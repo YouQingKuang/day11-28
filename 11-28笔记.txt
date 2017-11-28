@@ -1,0 +1,18 @@
+1.java -jar target\autoconfig-0.0.1-SNAPSHOT.jar --app.count=99
+	（在命令行赋值）
+2.java -jar target\autoconfig-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod
+	（读取其他的配置文件）
+3.①在pojo添加注解@ConfigurationProperties("foo")
+  ②在application.properties添加前缀为foo的属性值（如：foo.enabled=true  foo.security.username=wangwu）
+  ③创建pojo的bean
+
+	@Configuration
+	public class PojoConfig {
+	
+		@Bean
+		public FooProperties getFoo() {
+			return new FooProperties();
+		}
+	}
+  ④获取bean，bean会自带配置文件中设置的属性
+
